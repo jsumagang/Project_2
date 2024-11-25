@@ -6,4 +6,5 @@
         android:title="@string/logged_in"
         app:showAsAction="ifRoom"
         />
+
 </menu>

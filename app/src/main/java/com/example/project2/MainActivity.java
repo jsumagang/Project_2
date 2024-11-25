@@ -22,8 +22,6 @@ import com.example.project2.Database.GameRepository;
 import com.example.project2.Database.entities.User;
 import com.example.project2.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2.MAIN_ACTIVITY_USER_ID";
@@ -65,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 //        binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 //        updateDisplay();
 
+
     }
 
     private void loginUser(Bundle savedInstanceState) {
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.logout_menu, menu);
+        inflater.inflate(R.menu.menus, menu);
         return true;
     }
 
@@ -115,7 +114,12 @@ public class MainActivity extends AppCompatActivity {
         if (user == null) {
             return false;
         }
-        item.setTitle(user.getUsername());
+        if (user.isAdmin()){
+            item.setTitle("ADMIN: "+user.getUsername());
+        }
+        else{
+            item.setTitle(user.getUsername());
+        }
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
