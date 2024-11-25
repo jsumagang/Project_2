@@ -7,18 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-//import com.example.project2.Database.entities.GymLog;
 import com.example.project2.MainActivity;
 import com.example.project2.Database.entities.User;
-//import com.example.project2.Database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-//@TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {User.class}, version = 4, exportSchema = false)
 public abstract class GameDatabase extends RoomDatabase {
 
