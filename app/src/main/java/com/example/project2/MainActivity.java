@@ -55,24 +55,16 @@ public class MainActivity extends AppCompatActivity {
         loginUser(savedInstanceState);
 
         //User is not logged in at this point, go to login screen
-        if(loggedInUserId == -1){
+        if (loggedInUserId == -1) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }
 
         updateSharedPreference();
 
-        binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
-        updateDisplay();
+//        binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
+//        updateDisplay();
 
-        binding.logButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getInformationFromDisplay();
-                insertGymlogRecord();
-                updateDisplay();
-            }
-        });
     }
 
     private void loginUser(Bundle savedInstanceState) {
@@ -82,19 +74,19 @@ public class MainActivity extends AppCompatActivity {
 
         loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), LOGGED_OUT);
 
-        if(loggedInUserId == LOGGED_OUT & savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)){
+        if (loggedInUserId == LOGGED_OUT & savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)) {
             loggedInUserId = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
         }
-        if(loggedInUserId == LOGGED_OUT){
+        if (loggedInUserId == LOGGED_OUT) {
             loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
         }
-        if(loggedInUserId == LOGGED_OUT){
+        if (loggedInUserId == LOGGED_OUT) {
             return;
         }
         LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
         userObserver.observe(this, user -> {
             this.user = user;
-            if(this.user != null){
+            if (this.user != null) {
                 invalidateOptionsMenu();
             }
 
@@ -120,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.logoutMenuItem);
         item.setVisible(true);
-        if(user==null){
+        if (user == null) {
             return false;
         }
         item.setTitle(user.getUsername());
@@ -135,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void showLogoutDialog(){
+    private void showLogoutDialog() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
@@ -171,52 +163,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void updateSharedPreference(){
+    private void updateSharedPreference() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key),
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(getString(R.string.preference_userId_key),loggedInUserId);
+        sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
         sharedPrefEditor.apply();
     }
 
 
-    static Intent mainActivityIntentFactory(Context context, int userId){
+    static Intent mainActivityIntentFactory(Context context, int userId) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
     }
 
-    private void insertGymlogRecord(){
-        if(mExercise.isEmpty()){
-            return;
-        }
-        GymLog log = new GymLog(mExercise, mWeight, mReps,loggedInUserId);
-        repository.insertGymLog(log);
-    }
+//    private void insertGymlogRecord(){
+//        if(mExercise.isEmpty()){
+//            return;
+//        }
+//        GymLog log = new GymLog(mExercise, mWeight, mReps,loggedInUserId);
+//        repository.insertGymLog(log);
+//    }
 
-    private void updateDisplay(){
-        ArrayList<GymLog> allLogs = repository.getAllLogsByUserId(loggedInUserId);
-        if(allLogs.isEmpty()){
-            binding.logDisplayTextView.setText(R.string.nothing_to_show_time_to_hit_the_gym);
-        }
-        StringBuilder sb = new StringBuilder();
-        for (GymLog log : allLogs){
-            sb.append(log);
-        }
-        binding.logDisplayTextView.setText(sb.toString());
-    }
+//    private void updateDisplay() {
+//        ArrayList<GymLog> allLogs = repository.getAllLogsByUserId(loggedInUserId);
+//        if (allLogs.isEmpty()) {
+//            binding.logDisplayTextView.setText(R.string.nothing_to_show_time_to_hit_the_gym);
+//        }
+//        StringBuilder sb = new StringBuilder();
+//        for (GymLog log : allLogs) {
+//            sb.append(log);
+//        }
+//        binding.logDisplayTextView.setText(sb.toString());
+//    }
 
-    private void getInformationFromDisplay(){
-        mExercise = binding.exerciseInputEditText.getText().toString();
-
-        try{
-            mWeight = Double.parseDouble(binding.weightInputEditText.getText().toString());
-        } catch (NumberFormatException e){
-            Log.d(TAG, "Error reading value from Weight edit text.");
-        }
-        try{
-            mReps = Integer.parseInt(binding.repInputEditText.getText().toString());
-        } catch (NumberFormatException e){
-            Log.d(TAG, "Error reading value from reps text.");
-        }
-    }
+//    private void getInformationFromDisplay(){
+//        mExercise = binding.exerciseInputEditText.getText().toString();
+//
+//        try{
+//            mWeight = Double.parseDouble(binding.weightInputEditText.getText().toString());
+//        } catch (NumberFormatException e){
+//            Log.d(TAG, "Error reading value from Weight edit text.");
+//        }
+//        try{
+//            mReps = Integer.parseInt(binding.repInputEditText.getText().toString());
+//        } catch (NumberFormatException e){
+//            Log.d(TAG, "Error reading value from reps text.");
+//        }
+//    }
+}

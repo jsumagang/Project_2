@@ -29,7 +29,7 @@ public class GameRepository {
     private GameRepository(Application application){
         GameDatabase db = GameDatabase.getDatabase(application);
         //this.gymLogDAO = db.gymLogDAO();
-        this.userDAO = db.UserDAO();
+        this.userDAO = db.userDAO();
         //this.allLogs = (ArrayList<GymLog>) this.gymLogDAO.getAllRecords();
     }
 
