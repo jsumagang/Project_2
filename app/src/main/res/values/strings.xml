@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Project 2</string>
+    <string name="welcome_log_in">Welcome!\nPlease log in</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>
