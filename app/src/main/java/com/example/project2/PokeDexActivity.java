@@ -1,5 +1,7 @@
 package com.example.project2;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,5 +58,9 @@ public class PokeDexActivity extends AppCompatActivity {
                 Toast.makeText(PokeDexActivity.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    static Intent pokeDexIntentFactory(Context context){
+        return new Intent(context, PokeDexActivity.class);
     }
 }

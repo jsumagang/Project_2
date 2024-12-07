@@ -12,41 +12,41 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class GameRepository {
+public class DexRepository {
 
 
     private final UserDAO userDAO;
 
-    private static GameRepository repository;
+    private static DexRepository repository;
 
-    private GameRepository(Application application){
-        GameDatabase db = GameDatabase.getDatabase(application);
+    private DexRepository(Application application){
+        DexDatabase db = DexDatabase.getDatabase(application);
         this.userDAO = db.userDAO();
     }
 
-    public static GameRepository getRepository(Application application){
+    public static DexRepository getRepository(Application application){
         if(repository!=null){
             return repository;
         }
-        Future<GameRepository> future = GameDatabase.databaseWriteExecutor.submit(
-                new Callable<GameRepository>() {
+        Future<DexRepository> future = DexDatabase.databaseWriteExecutor.submit(
+                new Callable<DexRepository>() {
                     @Override
-                    public GameRepository call() throws Exception {
-                        return new GameRepository(application);
+                    public DexRepository call() throws Exception {
+                        return new DexRepository(application);
                     }
                 }
         );
         try{
             return future.get();
         }catch(InterruptedException | ExecutionException e){
-            Log.d(MainActivity.TAG, "Problem getting GymLogRepository, thread error.");
+            Log.d(MainActivity.TAG, "Problem getting Repository, thread error.");
         }
         return null;
     }
 
 
     public void insertUser(User... user){
-        GameDatabase.databaseWriteExecutor.execute(()->{
+        DexDatabase.databaseWriteExecutor.execute(()->{
             userDAO.insert(user);
         });
     }

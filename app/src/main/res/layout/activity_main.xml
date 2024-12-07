@@ -7,26 +7,73 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/welcome_to_landing_page_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_nthis_is_the_landing_page"
-        android:textAlignment="center"
-        android:textSize="60sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/show_if_admin_text_view"
+        android:id="@+id/homePageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome to the Dex!"
+        android:textAlignment="center"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/welcome_to_landing_page_text_view" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/dexPageButton"
+            android:layout_width="120dp"
+            android:layout_height="61dp"
+            android:text="@string/dex"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/dex_page_text_view"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="This is the dex page where you can look up information"
+            />
+        <Button
+            android:id="@+id/favoritesPageButton"
+            android:layout_width="120dp"
+            android:layout_height="61dp"
+            android:text="@string/favorites"
+            android:textSize="17sp"
+            />
+        <TextView
+            android:id="@+id/favorites_page_text_view"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="This is the favorites page where you can see your favorites"
+            />
+        <Button
+            android:id="@+id/tierlistPageButton"
+            android:layout_width="120dp"
+            android:layout_height="61dp"
+            android:text="@string/tierlist"
+            android:textSize="17sp"
+            />
+        <TextView
+            android:id="@+id/tierlist_page_text_view"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="This is the favorites page where you can see the tier list"
+            />
+
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

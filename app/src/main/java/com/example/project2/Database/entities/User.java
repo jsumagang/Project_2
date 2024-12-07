@@ -3,11 +3,11 @@ package com.example.project2.Database.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.project2.Database.GameDatabase;
+import com.example.project2.Database.DexDatabase;
 
 import java.util.Objects;
 
-@Entity(tableName = GameDatabase.USER_TABLE)
+@Entity(tableName = DexDatabase.USER_TABLE)
 public class User {
 
     @PrimaryKey(autoGenerate = true)

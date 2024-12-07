@@ -9,4 +9,7 @@
     <string name="logged_in">LOGGED IN</string>
     <string name="welcome_nthis_is_the_landing_page">Welcome!\nThis is the landing page</string>
     <string name="name">Name</string>
+    <string name="dex">Dex</string>
+    <string name="favorites">Favorites</string>
+    <string name="tierlist">Tier List</string>
 </resources>

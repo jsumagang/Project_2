@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.project2.Database.GameRepository;
+import com.example.project2.Database.DexRepository;
 import com.example.project2.Database.entities.User;
 import com.example.project2.databinding.ActivityMainBinding;
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    private GameRepository repository;
+    private DexRepository repository;
 
     public static final String TAG = "DAC_Game";
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = GameRepository.getRepository(getApplication());
+        repository = DexRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
         //User is not logged in at this point, go to login screen
@@ -56,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         updateSharedPreference();
+
+        binding.dexPageButton.setOnClickListener(v -> {
+            startActivity(PokeDexActivity.pokeDexIntentFactory(getApplicationContext()));
+
+        });
 
 
     }
@@ -175,5 +180,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
     }
+
+
 
 }

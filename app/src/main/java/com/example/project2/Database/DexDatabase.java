@@ -16,25 +16,23 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {User.class}, version = 4, exportSchema = false)
-public abstract class GameDatabase extends RoomDatabase {
+public abstract class DexDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
-    private static final String DATABASE_NAME = "Gamedatabase";
+    private static final String DATABASE_NAME = "DexDatabase";
 
-    public static final String Game_TABLE = "Game_TABLE";
-
-    private static volatile GameDatabase INSTANCE;
+    private static volatile DexDatabase INSTANCE;
 
     private static final int NUMBER_OF_THREADS = 4;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static GameDatabase getDatabase(final Context context){
+    static DexDatabase getDatabase(final Context context){
         if(INSTANCE == null){
-            synchronized (GameDatabase.class){
+            synchronized (DexDatabase.class){
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    GameDatabase.class, DATABASE_NAME)
+                                    DexDatabase.class, DATABASE_NAME)
                             .fallbackToDestructiveMigration()
                             .addCallback(addDefaultValues)
                             .build();
@@ -62,7 +60,7 @@ public abstract class GameDatabase extends RoomDatabase {
         }
     };
 
-    public abstract GameDAO gameDAO();
+    public abstract DexDAO gameDAO();
 
     public abstract UserDAO userDAO();
 }
