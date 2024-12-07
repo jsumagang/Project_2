@@ -3,6 +3,7 @@ package com.example.project2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,8 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.example.project2.databinding.ActivityPokeDexBinding;
 
 import com.bumptech.glide.Glide;
+import com.example.project2.Database.DexRepository;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,15 +27,28 @@ public class PokeDexActivity extends AppCompatActivity {
     private TextView pokemonNameTextView;
     private ImageView pokemonImageView;
 
+    private ActivityPokeDexBinding binding;
+
+    private DexRepository repository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poke_dex);
 
+        binding = ActivityPokeDexBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         pokemonNameTextView = findViewById(R.id.pokemonName);
         pokemonImageView = findViewById(R.id.pokemonImage);
 
         fetchPokemon("pikachu"); // Replace with a dynamic name as needed
+
+        binding.homePageButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private void fetchPokemon(String name) {
