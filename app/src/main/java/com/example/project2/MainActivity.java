@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DexRepository repository;
 
-    public static final String TAG = "DAC_Game";
+    public static final String TAG = "Project2";
 
     private int loggedInUserId = -1;
 
@@ -62,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        binding.favoritesPageButton.setOnClickListener(v -> {
+            startActivity(FavoritesActivity.favoritesIntentFactory(getApplicationContext()));
+        });
+
+        binding.tierlistPageButton.setOnClickListener(v -> {
+            startActivity(TierListActivity.tierListIntentFactory(getApplicationContext()));
+        });
 
     }
 
@@ -181,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
         return intent;
     }
 
-
+    static Intent mainActivityIntentFactory(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
 
 }

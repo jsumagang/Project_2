@@ -45,8 +45,7 @@ public class PokeDexActivity extends AppCompatActivity {
         fetchPokemon("pikachu"); // Replace with a dynamic name as needed
 
         binding.homePageButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext()));
         });
 
     }
