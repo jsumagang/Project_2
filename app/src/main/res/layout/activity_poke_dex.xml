@@ -8,10 +8,14 @@
     tools:context=".PokeDexActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/pokemonName"
@@ -28,17 +32,36 @@
 
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/pokedexUserInput"
+        android:layout_width="399dp"
+        android:layout_height="50dp"
+        android:hint="@string/enter_pok_mon_name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
+        android:id="@+id/pokedexSubmitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/pokedexUserInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/favoriteItButton"
         android:layout_width="120dp"
         android:layout_height="61dp"
-        android:id="@+id/favoriteItButton"
         android:text="Add to Favorites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="50dp"
-        />
+        android:layout_marginEnd="50dp" />
 
     <Button
         android:id="@+id/homePageButton"
@@ -49,9 +72,6 @@
         android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

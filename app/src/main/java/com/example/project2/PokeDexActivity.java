@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,9 @@ import com.example.project2.databinding.ActivityPokeDexBinding;
 import com.bumptech.glide.Glide;
 import com.example.project2.Database.DexRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,6 +35,8 @@ public class PokeDexActivity extends AppCompatActivity {
 
     private DexRepository repository;
 
+    private List<String> favPokemonList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +48,40 @@ public class PokeDexActivity extends AppCompatActivity {
         pokemonNameTextView = findViewById(R.id.pokemonName);
         pokemonImageView = findViewById(R.id.pokemonImage);
 
-        fetchPokemon("pikachu"); // Replace with a dynamic name as needed
+        EditText pokemonInput = findViewById(R.id.pokedexUserInput);
+        Button submitButton = findViewById(R.id.pokedexSubmitButton);
+
+        Button addToFavBtn = findViewById(R.id.favoriteItButton);
+
+        submitButton.setOnClickListener(view -> {
+            String pokemonName = pokemonInput.getText().toString().trim().toLowerCase()
+                    ;
+            if (!pokemonName.isEmpty()) {
+                fetchPokemon(pokemonName);
+            } else {
+                Toast.makeText(PokeDexActivity.this, "Please enter a Pokémon name", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        addToFavBtn.setOnClickListener(view -> {
+            String pokemonName = pokemonInput.getText().toString().trim().toLowerCase();
+
+            if (!pokemonName.isEmpty()) {
+                favPokemonList.add(pokemonName);
+                Toast.makeText(PokeDexActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(PokeDexActivity.this, "Please enter a Pokémon name", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
         binding.homePageButton.setOnClickListener(v -> {
             startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext()));
         });
 
     }
+
 
     private void fetchPokemon(String name) {
         PokeApiService apiService = RetrofitClient.getRetrofitInstance().create(PokeApiService.class);
