@@ -1,5 +1,7 @@
 package com.example.project2;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -30,9 +32,13 @@ public class SignupActivity extends AppCompatActivity {
         repository = DexRepository.getRepository(getApplication());
 
         binding.registerButton.setOnClickListener(v -> {
-            @Override
-            public void onClick(View v) {createAccount();}
+            createAccount();
         });
+
+        binding.backToLoginButton.setOnClickListener(v -> {
+            startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+        });
+
     }
 
     private void createAccount() {
@@ -48,11 +54,18 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
+        repository.insertUser(username, password);
+
+        toastMaker("Account Created");
 
     }
 
     private void toastMaker(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    static Intent signupIntentFactory(Context context){
+        return new Intent(context, SignupActivity.class);
     }
 
 }

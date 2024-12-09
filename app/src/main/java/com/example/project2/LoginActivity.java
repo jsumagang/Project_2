@@ -36,6 +36,13 @@ public class LoginActivity extends AppCompatActivity {
                 verifyUser();
             }
         });
+
+        binding.goToSignupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(SignupActivity.signupIntentFactory(getApplicationContext()));
+            }
+        });
     }
 
     private void verifyUser() {

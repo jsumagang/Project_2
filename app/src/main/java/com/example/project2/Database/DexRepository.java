@@ -45,9 +45,10 @@ public class DexRepository {
     }
 
 
-    public void insertUser(User... user){
+    public void insertUser(String username, String password){
+        User newUser = new User(username, password);
         DexDatabase.databaseWriteExecutor.execute(()->{
-            userDAO.insert(user);
+            userDAO.insert(newUser);
         });
     }
 
