@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,6 +48,14 @@ public class PokeDexActivity extends AppCompatActivity {
         // Access the repository
         repository = DexRepository.getRepository(getApplication());
 
+        // Check if the repository is null
+        if (repository == null) {
+            Log.e("PokeDexActivity", "Repository is null!");
+            Toast.makeText(this, "An error occurred while accessing the database.", Toast.LENGTH_LONG).show();
+            finish(); // Optionally close the activity since the app can't proceed without a repository
+            return;
+        }
+
         // Retrieve the loggedInUserId from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         int loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), -1);
@@ -63,8 +72,7 @@ public class PokeDexActivity extends AppCompatActivity {
         Button addToFavBtn = findViewById(R.id.favoriteItButton);
 
         submitButton.setOnClickListener(view -> {
-            String pokemonName = pokemonInput.getText().toString().trim().toLowerCase()
-                    ;
+            String pokemonName = pokemonInput.getText().toString().trim().toLowerCase();
             if (!pokemonName.isEmpty()) {
                 fetchPokemon(pokemonName);
             } else {
@@ -82,18 +90,16 @@ public class PokeDexActivity extends AppCompatActivity {
 
                     if (user != null) {
                         // Add the Pokémon to the user's favorite list
-                        List<String> favPokemonList = user.getFavPokemonList();
+                        List<String> favPokemonList = new ArrayList<>(user.getFavPokemonList());
                         if (!favPokemonList.contains(pokemonName)) { // Prevent duplicates
                             favPokemonList.add(pokemonName);
                             user.setFavPokemonList(favPokemonList);
-
-                            // Update the user in the database
                             repository.updateUser(user);
-
                             runOnUiThread(() -> Toast.makeText(PokeDexActivity.this, "Added to favorites!", Toast.LENGTH_SHORT).show());
                         } else {
                             runOnUiThread(() -> Toast.makeText(PokeDexActivity.this, "Already in favorites!", Toast.LENGTH_SHORT).show());
                         }
+
                     } else {
                         runOnUiThread(() -> Toast.makeText(PokeDexActivity.this, "User not found", Toast.LENGTH_SHORT).show());
                     }
@@ -109,8 +115,8 @@ public class PokeDexActivity extends AppCompatActivity {
         binding.homePageButton.setOnClickListener(v -> {
             startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext()));
         });
-
     }
+
 
 
     private void fetchPokemon(String name) {
