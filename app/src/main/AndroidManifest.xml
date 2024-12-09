@@ -16,6 +16,9 @@
             android:name=".FavoritesView"
             android:exported="false" />
         <activity
+            android:name=".signup"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity

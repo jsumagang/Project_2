@@ -45,7 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Button pokedex;
 
-    @Override
+
+
+
+
+
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -69,11 +74,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }
-
         updateSharedPreference();
 
-
-    }
+    }*/
 
     private void loginUser(Bundle savedInstanceState) {
         //check shared preference for logged in user
@@ -190,5 +193,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
     }
+
+
 
 }

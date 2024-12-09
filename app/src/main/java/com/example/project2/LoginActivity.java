@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,11 +24,29 @@ public class LoginActivity extends AppCompatActivity {
     private GameRepository repository;
 
 
+    EditText userNameSignupEditText, passwordSignupEditText;
+
+    Button loginButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+        userNameSignupEditText = findViewById(R.id.userNameLogInEditText);
+        passwordSignupEditText = findViewById(R.id.userNameLogInEditText);
+        loginButton = findViewById(R.id.loginButton);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this, signup.class);
+                startActivity(i);
+            }
+        });
+
 
         repository = GameRepository.getRepository(getApplication());
 
@@ -35,8 +55,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 verifyUser();
             }
+
         });
+
+
+
+
+
     }
+
+
+
+
 
     private void verifyUser() {
         String username = binding.userNameLogInEditText.getText().toString();
