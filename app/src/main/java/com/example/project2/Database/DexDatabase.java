@@ -10,14 +10,16 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.project2.Database.entities.PokemonTierList;
 import com.example.project2.Database.typeConverters.Converters;
 import com.example.project2.MainActivity;
 import com.example.project2.Database.entities.User;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class}, version = 6, exportSchema = false)
+@Database(entities = {User.class, PokemonTierList.class}, version = 9, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class DexDatabase extends RoomDatabase {
 
@@ -31,7 +33,7 @@ public abstract class DexDatabase extends RoomDatabase {
 
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static DexDatabase getDatabase(final Context context){
+    public static DexDatabase getDatabase(final Context context){
         if(INSTANCE == null){
             synchronized (DexDatabase.class){
                 if(INSTANCE == null){
@@ -46,26 +48,41 @@ public abstract class DexDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback(){
+    private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback() {
         @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db){
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
+
             databaseWriteExecutor.execute(() -> {
-                UserDAO dao = INSTANCE.userDAO();
-                dao.deleteAll();
+                // Populate the User table with default values
+                UserDAO userDao = INSTANCE.userDAO();
+                userDao.deleteAll();
                 User admin = new User("admin1", "admin1");
                 admin.setAdmin(true);
-                dao.insert(admin);
+                userDao.insert(admin);
 
                 User testUser1 = new User("testuser1", "testuser1");
-                dao.insert(testUser1);
+                userDao.insert(testUser1);
+
+                // Populate the PokemonTierList table with default values
+                PokemonTierListDao tierListDao = INSTANCE.pokemonTierListDao();
+                tierListDao.deleteAll();
+
+                // Add default Pokémon tiers
+                tierListDao.insertPokemonTierList(new PokemonTierList('S', List.of("nidoking", "victini")));
+                tierListDao.insertPokemonTierList(new PokemonTierList('A', List.of("charizard", "slowpoke", "gengar")));
+                tierListDao.insertPokemonTierList(new PokemonTierList('B', List.of("hitmonchan", "mawile", "blaziken")));
+                tierListDao.insertPokemonTierList(new PokemonTierList('C', List.of("geodude", "loudred", "bunnelby")));
+                tierListDao.insertPokemonTierList(new PokemonTierList('F', List.of("zubat", "diglett", "gumshoos")));
             });
         }
     };
 
-    public abstract DexDAO gameDAO();
+
+    public abstract DexDAO dexDAO();
+
+    public abstract PokemonTierListDao pokemonTierListDao();
 
     public abstract UserDAO userDAO();
 }
-
