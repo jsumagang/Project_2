@@ -59,6 +59,17 @@ public class DexRepository {
         return userDAO.getUserByUserId(userId);
     }
 
+    // Get User by ID synchronously (for background threads)
+    public User getUserByUserIdSync(int userId) {
+        return userDAO.getUserByIdSync(userId);
+    }
+
+    // Update the user in the database
+    public void updateUser(User user) {
+        DexDatabase.databaseWriteExecutor.execute(() -> userDAO.update(user));
+    }
+
+
 }
 
 

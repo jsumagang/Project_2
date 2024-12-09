@@ -7,16 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.project2.Database.typeConverters.Converters;
 import com.example.project2.MainActivity;
 import com.example.project2.Database.entities.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class}, version = 4, exportSchema = false)
+@Database(entities = {User.class}, version = 6, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class DexDatabase extends RoomDatabase {
+
 
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "DexDatabase";
@@ -25,7 +29,7 @@ public abstract class DexDatabase extends RoomDatabase {
 
     private static final int NUMBER_OF_THREADS = 4;
 
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     static DexDatabase getDatabase(final Context context){
         if(INSTANCE == null){
