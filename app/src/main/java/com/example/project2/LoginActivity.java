@@ -4,7 +4,11 @@ import android.os.Bundle;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
         repository = DexRepository.getRepository(getApplication());
 
+
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +46,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(SignupActivity.signupIntentFactory(getApplicationContext()));
+            }
+        });
+        //if long click on signup button, go to admin signup activity
+        binding.goToSignupButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(AdminSignupActivity.adminSignupIntentFactory(getApplicationContext()));
+                return true;
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.project2.Database;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -48,6 +49,13 @@ public class DexRepository {
     public void insertUser(String username, String password){
         User newUser = new User(username, password);
         DexDatabase.databaseWriteExecutor.execute(()->{
+            userDAO.insert(newUser);
+        });
+    }
+    public void insertAdminUser(String username, String password){
+        User newUser = new User(username, password);
+        DexDatabase.databaseWriteExecutor.execute(()->{
+            newUser.setAdmin(true);
             userDAO.insert(newUser);
         });
     }

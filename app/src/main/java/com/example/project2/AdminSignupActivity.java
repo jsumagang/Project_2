@@ -10,29 +10,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.LiveData;
 
 import com.example.project2.Database.DexRepository;
-import com.example.project2.Database.entities.User;
-import com.example.project2.databinding.ActivitySignupBinding;
+import com.example.project2.databinding.ActivityAdminSignupBinding;
 
-public class SignupActivity extends AppCompatActivity {
-
+public class AdminSignupActivity extends AppCompatActivity {
 
     private DexRepository repository;
 
-    private ActivitySignupBinding binding;
+    private ActivityAdminSignupBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySignupBinding.inflate(getLayoutInflater());
+        binding = ActivityAdminSignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         repository = DexRepository.getRepository(getApplication());
 
-        binding.registerButton.setOnClickListener(v -> {
-            createAccount();
+        binding.registerAdminButton.setOnClickListener(v -> {
+            createAdminAccount();
         });
 
         binding.backToLoginButton.setOnClickListener(v -> {
@@ -41,9 +38,9 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    private void createAccount() {
-        String username = binding.userNameSignupEditText.getText().toString();
-        String password = binding.passwordSignupEditText.getText().toString();
+    private void createAdminAccount() {
+        String username = binding.userNameAdminSignupEditText.getText().toString();
+        String password = binding.passwordAdminSignupEditText.getText().toString();
 
         if(username.isEmpty()){
             toastMaker("Username must not be blank");
@@ -54,17 +51,16 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        repository.insertUser(username, password);
+        repository.insertAdminUser(username, password);
 
-        toastMaker("Account Created");
+        toastMaker("Admin Account Created");
     }
 
     private void toastMaker(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    static Intent signupIntentFactory(Context context){
-        return new Intent(context, SignupActivity.class);
+    static Intent adminSignupIntentFactory(Context context){
+        return new Intent(context, AdminSignupActivity.class);
     }
-
 }
