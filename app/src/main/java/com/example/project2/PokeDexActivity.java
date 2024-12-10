@@ -257,41 +257,42 @@ public class PokeDexActivity extends AppCompatActivity {
             }
         });
 
-        binding.DTierButton.setOnClickListener(view -> {
-            String pokemonName = binding.pokedexUserInput.getText().toString().trim().toLowerCase();
-
-            if (!pokemonName.isEmpty()) {
-                DexDatabase.databaseWriteExecutor.execute(() -> {
-                    PokemonTierListDao tierListDao = Objects.requireNonNull(DexRepository.getRepository(getApplication())).pokemonTierListDao();
-
-                    // Fetch the D Tier
-                    List<PokemonTierList> dTierList = tierListDao.getPokemonTierListsByTier('D');  //since getPokemonTierListsByTier is a SELECT * statement,
-                                                                                                    //its gonna have to return a LIST of PokemonTierList objects
-                    if (!dTierList.isEmpty()) {                                                     //instead of a single PokemonTierList object
-                        // Get the first entry for D Tier (I could've renamed these better :/)
-                        PokemonTierList dTier = dTierList.get(0);
-                        List<String> pokemonList = new ArrayList<>(dTier.getPokemonList());
-
-                        if (!pokemonList.contains(pokemonName)) {
-                            // Add Pokémon to the list
-                            pokemonList.add(pokemonName);
-                            dTier.setPokemonList(pokemonList);
-
-                            // Update the D Tier in the database
-                            tierListDao.updatePokemonTierList(dTier);
-
-                            runOnUiThread(() -> Toast.makeText(this, "Added to D Tier!", Toast.LENGTH_SHORT).show());
-                        } else {
-                            runOnUiThread(() -> Toast.makeText(this, "Already in D Tier!", Toast.LENGTH_SHORT).show());
-                        }
-                    } else {
-                        runOnUiThread(() -> Toast.makeText(this, "D Tier not found", Toast.LENGTH_SHORT).show());
-                    }
-                });
-            } else {
-                Toast.makeText(this, "Please enter a Pokémon name", Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Added this by accident...  But could implement this in the future
+//        binding.DTierButton.setOnClickListener(view -> {
+//            String pokemonName = binding.pokedexUserInput.getText().toString().trim().toLowerCase();
+//
+//            if (!pokemonName.isEmpty()) {
+//                DexDatabase.databaseWriteExecutor.execute(() -> {
+//                    PokemonTierListDao tierListDao = Objects.requireNonNull(DexRepository.getRepository(getApplication())).pokemonTierListDao();
+//
+//                    // Fetch the D Tier
+//                    List<PokemonTierList> dTierList = tierListDao.getPokemonTierListsByTier('D');  //since getPokemonTierListsByTier is a SELECT * statement,
+//                                                                                                    //its gonna have to return a LIST of PokemonTierList objects
+//                    if (!dTierList.isEmpty()) {                                                     //instead of a single PokemonTierList object
+//                        // Get the first entry for D Tier (I could've renamed these better :/)
+//                        PokemonTierList dTier = dTierList.get(0);
+//                        List<String> pokemonList = new ArrayList<>(dTier.getPokemonList());
+//
+//                        if (!pokemonList.contains(pokemonName)) {
+//                            // Add Pokémon to the list
+//                            pokemonList.add(pokemonName);
+//                            dTier.setPokemonList(pokemonList);
+//
+//                            // Update the D Tier in the database
+//                            tierListDao.updatePokemonTierList(dTier);
+//
+//                            runOnUiThread(() -> Toast.makeText(this, "Added to D Tier!", Toast.LENGTH_SHORT).show());
+//                        } else {
+//                            runOnUiThread(() -> Toast.makeText(this, "Already in D Tier!", Toast.LENGTH_SHORT).show());
+//                        }
+//                    } else {
+//                        runOnUiThread(() -> Toast.makeText(this, "D Tier not found", Toast.LENGTH_SHORT).show());
+//                    }
+//                });
+//            } else {
+//                Toast.makeText(this, "Please enter a Pokémon name", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         binding.FTierButton.setOnClickListener(view -> {
             String pokemonName = binding.pokedexUserInput.getText().toString().trim().toLowerCase();
@@ -340,7 +341,7 @@ public class PokeDexActivity extends AppCompatActivity {
         binding.ATierButton.setVisibility(visibility);
         binding.BTierButton.setVisibility(visibility);
         binding.CTierButton.setVisibility(visibility);
-        binding.DTierButton.setVisibility(visibility);
+        //binding.DTierButton.setVisibility(visibility);
         binding.FTierButton.setVisibility(visibility);
     }
 
