@@ -133,7 +133,9 @@ public class FavoritesActivity extends AppCompatActivity {
                             container.addView(pokemonNameTextView);
                             container.addView(pokemonImageView);
                         } else {
-                            Toast.makeText(FavoritesActivity.this, "Sprite not available for " + pokemon.getName(), Toast.LENGTH_SHORT).show();
+                            if(pokemon.getName()!=null) {
+                                Toast.makeText(FavoritesActivity.this, "Sprite not available for " + pokemon.getName(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     } else {
                         Toast.makeText(FavoritesActivity.this, "Pokémon not found", Toast.LENGTH_SHORT).show();
