@@ -7,15 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".FavoritesActivity">
 
-    <TextView
-        android:layout_width="400dp"
-        android:layout_height="100dp"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="80dp"
-        android:text="Favorite mon"
-        android:textSize="30sp"
-        android:id="@+id/FavoritePokemonTitle"
-        app:layout_constraintTop_toBottomOf="@id/favHomeButton"/>
 
     <Button
         android:id="@+id/favHomeButton"
@@ -34,6 +25,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/favHomeButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/favHomeButton"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteY="150dp">
+
+        <LinearLayout
+            android:id="@+id/favPokemonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

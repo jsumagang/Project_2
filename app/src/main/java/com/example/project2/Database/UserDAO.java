@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.project2.Database.entities.User;
 
@@ -31,4 +32,12 @@ public interface UserDAO {
 
     @Query("SELECT * FROM " + DexDatabase.USER_TABLE + " WHERE id == :userId" )
     LiveData<User> getUserByUserId(int userId);
+
+    // Fetch a user by ID synchronously
+    @Query("SELECT * FROM usertable WHERE id = :userId")
+    User getUserByIdSync(int userId);
+
+    // Update a user
+    @Update
+    void update(User user);
 }
