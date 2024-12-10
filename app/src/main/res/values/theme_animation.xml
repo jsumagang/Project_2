@@ -1,7 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Project2" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
+    <style name= "Theme.Pokemon" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color-->
         <item name="colorPrimary" >#9C27B0 </item>
         <item name="colorPrimaryVariant" >#CE0DFF</item>
@@ -13,15 +12,5 @@
 
         <!-- Status bar color-->
         <item name="android:statusBarColor" tools:targetApi = "l">?attr/colorPrimaryVariant</item>
-
-
-
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-
-
-
-
     </style>
-
-    <style name="Theme.Project2" parent="Base.Theme.Project2" />
 </resources>

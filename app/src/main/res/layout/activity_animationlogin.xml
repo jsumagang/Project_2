@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/aea"
+    app:layoutDescription="@xml/activity_animationlogin_scene2"
+    tools:context=".Animation_login">
+
+    <ImageView
+        android:id="@+id/pokemonGame"
+        android:layout_width="310dp"
+        android:layout_height="310dp"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:contentDescription="@string/images"
+        android:src="@drawable/pokemon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

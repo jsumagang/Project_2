@@ -14,4 +14,7 @@
     <string name="tierlist">Tier List</string>
     <string name="enter_pok_mon_name">Enter Pokémon name</string>
     <string name="submit">Submit</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="images">Images</string>
+    <string name="register">Register</string>
 </resources>
