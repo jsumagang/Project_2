@@ -2,8 +2,11 @@ package com.example.project2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,6 +76,10 @@ public class TierListActivity extends AppCompatActivity {
                     tierNameTextView.setPadding(0, 10, 0, 10);
                     tierNameTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
+                    // Set the text to bold and underlined
+                    tierNameTextView.setTypeface(null, Typeface.BOLD); // Make text bold
+                    tierNameTextView.setPaintFlags(tierNameTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG); // Underline the text
+
                     // Add the tier name TextView to the tierLayout
                     tierLayout.addView(tierNameTextView);
 
@@ -91,6 +98,7 @@ public class TierListActivity extends AppCompatActivity {
                                         pokemonNameTextView.setText(pokemon.getName());
                                         pokemonNameTextView.setTextSize(20);
                                         pokemonNameTextView.setPadding(0, 10, 0, 10);
+                                        pokemonNameTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                                         ImageView pokemonImageView = new ImageView(TierListActivity.this);
 
@@ -100,10 +108,14 @@ public class TierListActivity extends AppCompatActivity {
                                                 .override(200, 200) // Resize image
                                                 .into(pokemonImageView);
 
-                                        pokemonImageView.setLayoutParams(new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                                 LinearLayout.LayoutParams.WRAP_CONTENT
-                                        ));
+                                        );
+
+                                        layoutParams.gravity = Gravity.CENTER; // This centers the image
+
+                                        pokemonImageView.setLayoutParams(layoutParams);
 
                                         // Add the Pokémon's TextView and ImageView to the tierLayout
                                         tierLayout.addView(pokemonNameTextView);

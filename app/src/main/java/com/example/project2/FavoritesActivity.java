@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -109,19 +111,24 @@ public class FavoritesActivity extends AppCompatActivity {
                             pokemonNameTextView.setText(pokemon.getName());
                             pokemonNameTextView.setTextSize(20);
                             pokemonNameTextView.setPadding(0, 10, 0, 10);
+                            pokemonNameTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                             ImageView pokemonImageView = new ImageView(FavoritesActivity.this);
 
                             // Resize the image using Glide
                             Glide.with(FavoritesActivity.this)
                                     .load(pokemon.getSprites().getFrontDefault())
-                                    .override(200, 200) // Resize image (200x200 is an example size)
+                                    .override(300, 300)
                                     .into(pokemonImageView);
 
-                            pokemonImageView.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.WRAP_CONTENT,
                                     LinearLayout.LayoutParams.WRAP_CONTENT
-                            ));
+                            );
+
+                            layoutParams.gravity = Gravity.CENTER; // This centers the image
+
+                            pokemonImageView.setLayoutParams(layoutParams);
 
                             container.addView(pokemonNameTextView);
                             container.addView(pokemonImageView);
