@@ -33,13 +33,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PokeDexActivity extends AppCompatActivity {
-
+    private DexRepository repository;
     private TextView pokemonNameTextView;
     private ImageView pokemonImageView;
-    private boolean isAdmin;
     private ActivityPokeDexBinding binding;
 
-    private DexRepository repository;
+
+
+
     //Initialize all the buttons
     Button STierButton = findViewById(R.id.STierButton);
     Button ATierButton = findViewById(R.id.ATierButton);
@@ -54,6 +55,30 @@ public class PokeDexActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poke_dex);
+
+
+
+
+        // Access the repository
+        repository = DexRepository.getRepository(getApplication());
+
+        // Check if the repository is null
+        if (repository == null) {
+            Log.e("PokeDexActivity", "Repository is null!");
+            Toast.makeText(this, "An error occurred while accessing the database.", Toast.LENGTH_LONG).show();
+            finish(); // Optionally close the activity since the app can't proceed without a repository
+            return;
+        }
+
+        // Retrieve the loggedInUserId from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        int loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), -1);
+
+
+        User user = repository.getUserByUserIdSync(loggedInUserId);             // Synchronous call for background thread
+        boolean isAdmin = user.isAdmin();
+
+
         //checks if isAdmin to see if the buttons are viewable or not
         if(isAdmin){
             STierButton.setVisibility(View.VISIBLE);
@@ -72,20 +97,6 @@ public class PokeDexActivity extends AppCompatActivity {
             FTierButton.setVisibility(View.GONE);
         }
 
-        // Access the repository
-        repository = DexRepository.getRepository(getApplication());
-
-        // Check if the repository is null
-        if (repository == null) {
-            Log.e("PokeDexActivity", "Repository is null!");
-            Toast.makeText(this, "An error occurred while accessing the database.", Toast.LENGTH_LONG).show();
-            finish(); // Optionally close the activity since the app can't proceed without a repository
-            return;
-        }
-
-        // Retrieve the loggedInUserId from SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        int loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), -1);
 
         binding = ActivityPokeDexBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -113,7 +124,6 @@ public class PokeDexActivity extends AppCompatActivity {
             if (!pokemonName.isEmpty()) {
                 DexDatabase.databaseWriteExecutor.execute(() -> {
                     // Fetch the current user from the database
-                    User user = repository.getUserByUserIdSync(loggedInUserId); // Synchronous call for background thread
 
                     if (user != null) {
                         // Add the Pokémon to the user's favorite list
