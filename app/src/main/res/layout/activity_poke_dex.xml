@@ -74,4 +74,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
+    <Button
+        android:id="@+id/STierButton"
+        android:layout_width="118dp"
+        android:layout_height="57dp"
+        android:text="@string/add_to_s_tier"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.603" />
+
+    <Button
+        android:id="@+id/ATierButton"
+        android:layout_width="117dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="56dp"
+        android:text="@string/add_to_a_tier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/STierButton" />
+
+    <Button
+        android:id="@+id/BTierButton"
+        android:layout_width="116dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="508dp"
+        android:text="@string/add_to_b_tier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ATierButton" />
+
+    <Button
+        android:id="@+id/CTierButton"
+        android:layout_width="80dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/add_to_c_tier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/BTierButton" />
+
+    <Button
+        android:id="@+id/DTierButton"
+        android:layout_width="81dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="39dp"
+        android:text="@string/add_to_d_tier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/CTierButton" />
+
+    <Button
+        android:id="@+id/FTierButton"
+        android:layout_width="76dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="43dp"
+        android:text="@string/add_to_f_tier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/DTierButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

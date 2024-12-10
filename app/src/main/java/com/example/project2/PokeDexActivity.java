@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,15 +36,41 @@ public class PokeDexActivity extends AppCompatActivity {
 
     private TextView pokemonNameTextView;
     private ImageView pokemonImageView;
-
+    private boolean isAdmin;
     private ActivityPokeDexBinding binding;
 
     private DexRepository repository;
+    //Initialize all the buttons
+    Button STierButton = findViewById(R.id.STierButton);
+    Button ATierButton = findViewById(R.id.ATierButton);
+    Button BTierButton = findViewById(R.id.BTierButton);
+    Button CTierButton = findViewById(R.id.CTierButton);
+    Button DTierButton = findViewById(R.id.DTierButton);
+    Button FTierButton = findViewById(R.id.FTierButton);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poke_dex);
+        //checks if isAdmin to see if the buttons are viewable or not
+        if(isAdmin){
+            STierButton.setVisibility(View.VISIBLE);
+            ATierButton.setVisibility(View.VISIBLE);
+            BTierButton.setVisibility(View.VISIBLE);
+            CTierButton.setVisibility(View.VISIBLE);
+            DTierButton.setVisibility(View.VISIBLE);
+            FTierButton.setVisibility(View.VISIBLE);
+        }
+        else{
+            STierButton.setVisibility(View.GONE);
+            ATierButton.setVisibility(View.GONE);
+            BTierButton.setVisibility(View.GONE);
+            CTierButton.setVisibility(View.GONE);
+            DTierButton.setVisibility(View.GONE);
+            FTierButton.setVisibility(View.GONE);
+        }
 
         // Access the repository
         repository = DexRepository.getRepository(getApplication());

@@ -15,4 +15,10 @@
     <string name="enter_pok_mon_name">Enter Pokémon name</string>
     <string name="submit">Submit</string>
     <string name="home">home</string>
+    <string name="add_to_s_tier">Add to S tier</string>
+    <string name="add_to_a_tier">Add to A Tier</string>
+    <string name="add_to_b_tier">Add to B Tier</string>
+    <string name="add_to_c_tier">Add to C Tier</string>
+    <string name="add_to_d_tier">add to d tier</string>
+    <string name="add_to_f_tier">add to f tier</string>
 </resources>
