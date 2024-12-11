@@ -71,6 +71,14 @@
             android:text="This is the favorites page where you can see the tier list"
             />
 
+        <Button
+            android:id="@+id/dexListButton"
+            android:layout_width="120dp"
+            android:layout_height="61dp"
+            android:text="dex list"
+            android:textSize="17sp"
+            />
+
 
     </LinearLayout>
 

@@ -70,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(TierListActivity.tierListIntentFactory(getApplicationContext()));
         });
 
+        binding.dexListButton.setOnClickListener(v -> {
+            startActivity(PokedexListActivity.pokeDexListIntentFactory(getApplicationContext()));
+        });
+
     }
 
     private void loginUser(Bundle savedInstanceState) {
