@@ -19,7 +19,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-
 import com.bumptech.glide.Glide;
 import com.example.project2.Database.PokemonTierListDao;
 import com.example.project2.Database.DexDatabase;
@@ -140,6 +139,10 @@ public class TierListActivity extends AppCompatActivity {
                 }
             });
         });
+
+
+
+
 
     }
 

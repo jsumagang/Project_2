@@ -83,6 +83,7 @@ public class FavoritesActivity extends AppCompatActivity {
 
     }
 
+
     static Intent favoritesIntentFactory(Context context){
         return new Intent(context, FavoritesActivity.class);
     }

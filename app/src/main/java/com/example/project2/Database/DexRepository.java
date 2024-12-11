@@ -1,7 +1,6 @@
 package com.example.project2.Database;
 
 import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -20,9 +19,11 @@ public class DexRepository {
 
     private static DexRepository repository;
 
+    private final DexDatabase database;
+
     private DexRepository(Application application){
-        DexDatabase db = DexDatabase.getDatabase(application);
-        this.userDAO = db.userDAO();
+        database = DexDatabase.getDatabase(application);
+        this.userDAO = database.userDAO();
     }
 
     public static DexRepository getRepository(Application application){
@@ -78,7 +79,9 @@ public class DexRepository {
         DexDatabase.databaseWriteExecutor.execute(() -> userDAO.update(user));
     }
 
+    public PokemonTierListDao pokemonTierListDao() {
+        return database.pokemonTierListDao();
+    }
 }
-
 
 
