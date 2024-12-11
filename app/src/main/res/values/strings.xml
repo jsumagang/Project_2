@@ -15,4 +15,8 @@
     <string name="enter_pok_mon_name">Enter Pokémon name</string>
     <string name="submit">Submit</string>
     <string name="home">home</string>
+    <string name="show_legendary_mons">Show Legendary Mons</string>
+    <string name="show_pseudo_legendary_mons">Show Pseudo Legendary Mons</string>
+    <string name="show_starter_mons">Show Starter Mons</string>
+    <string name="choose_a_set_of_monsters_to_display">Choose a set of monsters to display</string>
 </resources>

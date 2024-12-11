@@ -49,6 +49,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         return pokemonList.size();
     }
 
+    public void clearData() {
+        pokemonList.clear();
+        notifyDataSetChanged(); // Notify adapter that all data is cleared
+    }
     public void updateData(List<Pokemon> newPokemonList) {
         pokemonList.clear();
         pokemonList.addAll(newPokemonList);
