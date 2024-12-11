@@ -80,9 +80,6 @@ public abstract class DexDatabase extends RoomDatabase {
         }
     };
 
-
-    public abstract DexDAO dexDAO();
-
     public abstract PokemonTierListDao pokemonTierListDao();
 
     public abstract UserDAO userDAO();
